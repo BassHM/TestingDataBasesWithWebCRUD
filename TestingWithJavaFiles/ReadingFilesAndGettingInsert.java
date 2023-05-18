@@ -24,8 +24,9 @@ public class ReadingFileAndGettingInsert {
         this.fileUrl = fileUrl;
     }
 
-    public List<String> getInsert() throws FileNotFoundException {
+    public List<String> getInsert() {
         List<String> queryS = new ArrayList<>();
+
         try {
             int contador = 0;
             File file = new File(fileUrl);
@@ -35,12 +36,36 @@ public class ReadingFileAndGettingInsert {
                 sentence = sc.nextLine();
                 contador++;
                 String[] strSplited = sentence.split("_Title:", 2);
-                if (contador % sizeOfRows != 0) {
-                    query += "(" + strSplited[0].substring(4) + ",'" + strSplited[1] + "'),";
-                } else {
-                    query = command + query.substring(0, query.length()-1) + ";";
+                query += "(" + strSplited[0].substring(4) + ",'" + strSplited[1] + "'),";
+                if (contador % sizeOfRows == 0) {
+                    query = command + query.substring(0, query.length() - 1) + ";";
                     queryS.add(query);
-                    query = "(" + strSplited[0].substring(4) + ",'" + strSplited[1] + "'),";
+                    query = "";
+                }
+            }
+            return queryS;
+        } catch (FileNotFoundException e) {
+            return queryS;
+        }
+    }
+
+    public List<String> updateValues() {
+        List<String> queryS = new ArrayList<>();
+
+        try {
+            int contador = 0;
+            File file = new File(fileUrl);
+            Scanner sc = new Scanner(file);
+            String query = "";
+            while (sc.hasNextLine()) {
+                sentence = sc.nextLine();
+                contador++;
+                String[] strSplited = sentence.split("_Title:", 2);
+                query += "(" + strSplited[0].substring(4) + ",'" + strSplited[1] + "'),";
+                if (contador % sizeOfRows == 0) {
+                    query = command + query.substring(0, query.length() - 1) + ";";
+                    queryS.add(query);
+                    query = "";
                 }
             }
             return queryS;
@@ -50,19 +75,13 @@ public class ReadingFileAndGettingInsert {
     }
 
     public static void main(String[] args) {
-        System.out.print("Archivo no encontrado");
+        ReadingFileAndGettingInsert archivo = new ReadingFileAndGettingInsert(
+                "C:\\Users\\sebas\\repos\\ReadingFiles\\10KAlbums.txt");
+        List<String> queryS = new ArrayList<>();
+        queryS = archivo.getInsert();
 
-        ReadingFileAndGettingInsert archivo = new ReadingFileAndGettingInsert("C:\\Users\\sebas\\repos\\10KAlbums.txt");
-        try {
-            List<String> queryS = archivo.getInsert();
-            for(String query : queryS){
-                System.out.println(query);
-            }
-        } catch (FileNotFoundException e) {
-            System.out.print("Archivo no encontrado");
+        for (String query : queryS) {
+            System.out.println(query);
         }
     }
 }
-
-
-
