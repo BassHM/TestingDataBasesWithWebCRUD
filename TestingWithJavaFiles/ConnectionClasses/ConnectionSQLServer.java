@@ -1,6 +1,6 @@
 import java.sql.*;
 
-public class Connector {
+public class ConnectionSQLServer {
     //Connection string = jdbc:sqlserver://NOMBREDELSERVER\\NOMBREDELServicio.database.windows.net:puerto(1433 por defecto);
     private static final String URL = "jdbc:sqlserver://DESKTOP-U1NQ44F\\TESTDB.database.widows.net:1433;"
             + "database = L_III_Gestion_Alumnos;" //nombre de la database
@@ -15,7 +15,7 @@ public class Connector {
         
         try
         (Connection con = DriverManager.getConnection(URL)){
-            
+            System.out.println("CONNNNNNN");
         }
         catch(SQLException ex ){
             ex.printStackTrace();

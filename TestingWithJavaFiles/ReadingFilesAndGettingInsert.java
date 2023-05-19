@@ -1,7 +1,7 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
-package querys;
+package TestingWithJavaFiles;
 
 import java.io.IOException;
 import java.io.FileWriter;
@@ -15,7 +15,7 @@ import java.util.Scanner;
  *
  * @author sebas
  */
-public class ReadingFileAndGettingInsert {
+public class ReadingFilesAndGettingInsert {
 
     private final String fileUrl;
     public String sentence;
@@ -24,7 +24,7 @@ public class ReadingFileAndGettingInsert {
     public int numberOfRows;
     public int sizeOfQueryS;
 
-    public ReadingFileAndGettingInsert(String fileUrl, int numberOfRows, int sizeOfQueryS) {
+    public ReadingFilesAndGettingInsert(String fileUrl, int numberOfRows, int sizeOfQueryS) {
         this.fileUrl = fileUrl;
         this.numberOfRows = numberOfRows;
         this.sizeOfQueryS = sizeOfQueryS;
@@ -119,7 +119,7 @@ public class ReadingFileAndGettingInsert {
     }
 
     public static void main(String[] args) {
-        ReadingFileAndGettingInsert archivo = new ReadingFileAndGettingInsert(
+        ReadingFilesAndGettingInsert archivo = new ReadingFilesAndGettingInsert(
                 "C:\\Users\\sebas\\repos\\TestingDataBasesWithWebCRUD\\10KAlbums.txt", 10000, 500);
         List<String> queryS = new ArrayList<>();
 
